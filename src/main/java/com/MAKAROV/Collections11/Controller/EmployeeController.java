@@ -1,4 +1,5 @@
 package com.MAKAROV.Collections11.Controller;
+import com.MAKAROV.Collections11.exception.InvalidNameException;
 import com.MAKAROV.Collections11.models.Employee;
 import com.MAKAROV.Collections11.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,10 @@ import java.util.List;
         @ExceptionHandler({RuntimeException.class})
         public ResponseEntity<String> handleException(Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        @ExceptionHandler({InvalidNameException.class})
+        public ResponseEntity<String> handleException(InvalidNameException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
         private final EmployeeService employeeService;
